@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7996354924820602263}
   - component: {fileID: 7996354924820602262}
   - component: {fileID: 7996354924820602261}
-  - component: {fileID: 7996354924820602256}
+  - component: {fileID: 1580197995}
+  - component: {fileID: 1580197991}
   m_Layer: 0
   m_Name: timestop
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -469911816357420721, guid: d53110911604ff5438af3494593a1ddd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,7 +104,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7996354924820602256
+--- !u!50 &1580197995
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7996354924820602260}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
+--- !u!114 &1580197991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd63b1449d2dee842a395d9acadb0e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upVelocity: 0.2
-  flyTimeSeconds: 1.1
-  gameMenu: {fileID: 0}
+  upVelocity: 0.3
+  flyTimeSeconds: 1

@@ -23,9 +23,9 @@ public abstract class EnemyControl : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask whatIsGround;
 
-    private bool faceRight = true;
+    protected bool faceRight = true;
     internal bool canmove = true;
-    void Start()
+    protected virtual void Start()
     {
         startPoint = transform.position;
         enemyRb = GetComponent<Rigidbody2D>();
@@ -36,8 +36,11 @@ public abstract class EnemyControl : MonoBehaviour
     {
         if (IsGroundEnding())
             Flip();
+
         if (currentState == EnemyState.Move)
             Move();
+        else if (currentState == EnemyState.Attack)
+            Attack();
     }
 
     protected void Update()
@@ -54,6 +57,11 @@ public abstract class EnemyControl : MonoBehaviour
             return;
         }
         enemyRb.velocity = transform.right * new Vector2(speed, enemyRb.velocity.y);
+    }
+
+    protected virtual void Attack()
+    {
+        Debug.Log("Attack");
     }
 
     protected void Flip()
@@ -101,6 +109,5 @@ public enum EnemyState
 {
     Idle,
     Move,
-    Attack,
-    
+    Attack,  
 }

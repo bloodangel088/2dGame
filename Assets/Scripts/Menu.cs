@@ -18,8 +18,8 @@ public class Menu : BaseMenu
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
-            ChangeMenuStatus();
+        //if (Input.GetKeyUp(KeyCode.Escape))
+        //    ChangeMenuStatus();
     }
 
     protected override void OnDestroy()
@@ -33,7 +33,18 @@ public class Menu : BaseMenu
     {
         base.ChangeMenuStatus();
         Time.timeScale = menu.activeInHierarchy ? 0 : 1;
+        if (!GetIsMenuActive())
+        {
+            FindObjectOfType<PCcontroller>().ResetMenuActivated();
+        }
     }
+
+    public void ToggleMenu()
+    {
+        ChangeMenuStatus();
+    }
+
+    public bool GetIsMenuActive() => base.menu.activeSelf;
 
     public void GoToMainMenu()
     {

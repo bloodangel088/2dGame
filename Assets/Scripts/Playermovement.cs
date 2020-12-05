@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Scripting.APIUpdating;
 
-[RequireComponent(typeof(Rigidbody2D),typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(AudioSource))]
 public class Playermovement : MonoBehaviour
 {
     private Rigidbody2D _playerRB;
@@ -31,6 +31,10 @@ public class Playermovement : MonoBehaviour
     [SerializeField] private Transform attack2;
     private bool casting;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource castSound;
+
     private Animator animator;
     private PlayerHp playerHp;
 
@@ -39,6 +43,8 @@ public class Playermovement : MonoBehaviour
         _playerRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerHp = GetComponent<PlayerHp>();
+        audioSource = GetComponents<AudioSource>()[0];
+        castSound = GetComponents<AudioSource>()[1];
     }
 
     private void OnDrawGizmos()
@@ -103,6 +109,12 @@ public class Playermovement : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(move));
         animator.SetBool("jump", !_grounded);
         #endregion
+        if (_grounded && _playerRB.velocity.x != 0 && audioSource.isPlaying == false)
+            audioSource.Play();
+        else if (!_grounded || _playerRB.velocity.x == 0)
+            audioSource.Stop();
+        
+
     }
     #region Fireball
     public void StartCast()
@@ -112,6 +124,9 @@ public class Playermovement : MonoBehaviour
             return;
         }
         casting = true;
+        if (casting)
+            castSound.Play();
+        
         playerHp.ChangeMp (-10);
         animator.SetBool("Cast", true);
     }
@@ -127,6 +142,8 @@ public class Playermovement : MonoBehaviour
     private void endCast()
     {
         casting = false;
+        if (!casting)
+            castSound.Stop();
         animator.SetBool("Cast", false);
     }
     #endregion

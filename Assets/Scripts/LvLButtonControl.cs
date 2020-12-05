@@ -14,12 +14,13 @@ public class LvLButtonControl : MonoBehaviour
         if (LvLManager.GetLastLevelIndex() < (int)scene)
         {
             button.interactable = false;
-            GetComponentInChildren<TMP_Text>().text = ((int)scene).ToString();
-            return;
+        }
+        else
+        {
+            button.interactable = true;
+            button.onClick.AddListener(ChangeLvL);
         }
 
-        button.interactable = true;
-        button.onClick.AddListener(ChangeLvL);
         GetComponentInChildren<TMP_Text>().text = ((int)scene).ToString();
     }
 

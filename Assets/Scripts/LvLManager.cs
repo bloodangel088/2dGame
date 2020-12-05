@@ -22,6 +22,7 @@ public class LvLManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        TryUpdateLevel();
     }
 
     public void Restart()
@@ -37,7 +38,7 @@ public class LvLManager : MonoBehaviour
     public void EndLvL()
     {
         if (HaveNextScene)
-            ChangeLvL(SceneManager.GetActiveScene().buildIndex + 1);
+            ChangeLvL(CurrentScene + 1);
         else
             ChangeLvL(0);
     }
@@ -84,6 +85,7 @@ public enum Scenes
     second,
     third,
 }
+
 public enum GamePrefs
 {
     LastLevel,
